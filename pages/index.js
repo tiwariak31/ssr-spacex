@@ -52,8 +52,7 @@ export default function Home ({ data }) {
   return (
     <div>
       <Head>
-        <title>Create Next App</title>
-        <link rel='icon' href='/favicon.ico' />
+        <title>SSR SPACEX App</title>
       </Head>
       {isLoaded ? (
         <div className='loader-container'>
