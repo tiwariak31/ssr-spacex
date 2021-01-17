@@ -1,18 +1,18 @@
 import Head from 'next/head'
 import React, { useState } from 'react'
+import { isEmpty } from 'lodash'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Card, Button, Row, Col } from 'react-bootstrap'
 import ProductTile from '../components/product-tile'
 import { withRouter } from 'next/router'
-import queryString from 'query-string'
 
-const API_BASE_URL = 'https://api.spacexdata.com/v3/launches?limit=100'
+const API_BASE_URL = 'https://api.spacexdata.com/v3/launches?'
 
 export default function Home ({ data }) {
   const [data1, setData] = useState(data)
   const [isLoaded, setIsLoaded] = useState(false)
   const [filters, setFilters] = useState({
-    limit: 150,
+    limit: 100,
     launch_year: undefined,
     launch_success: undefined,
     land_success: undefined
@@ -21,8 +21,15 @@ export default function Home ({ data }) {
     .fill(0)
     .map((_, index) => 2006 + index)
 
-  const getUpdatedApiUrl = (filters = {}) => {
-    return API_BASE_URL + querystring.stringify({ ...filters })
+  const getUpdatedApiUrl = filters => {
+    let queryStr = ''
+    if (!isEmpty(filters)) {
+      for (let i in filters) {
+        queryStr += filters[i] !== undefined ? `&${i}=${filters[i]}` : ''
+      }
+    }
+    console.log('filters', filters, queryStr)
+    return API_BASE_URL + queryStr
   }
 
   const fetchAPI = filters => {
@@ -37,13 +44,12 @@ export default function Home ({ data }) {
       })
   }
   const updateApiFilters = (type, value) => {
-    debugger
-    if (filters[type] === value) {
-      value = undefined
-    }
+    // if (filters[type] === value) {
+    //   value = undefined
+    // }
 
     const appliedFilters = {
-      ...appliedFilters,
+      ...filters,
       [type]: value
     }
 
