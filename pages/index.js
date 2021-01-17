@@ -43,9 +43,9 @@ export default function Home ({ data }) {
       })
   }
   const updateApiFilters = (type, value) => {
-    // if (filters[type] === value) {
-    //   value = undefined
-    // }
+    if (filters[type] === value) {
+      value = undefined
+    }
 
     const appliedFilters = {
       ...filters,
