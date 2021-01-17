@@ -28,7 +28,6 @@ export default function Home ({ data }) {
         queryStr += filters[i] !== undefined ? `&${i}=${filters[i]}` : ''
       }
     }
-    console.log('filters', filters, queryStr)
     return API_BASE_URL + queryStr
   }
 
