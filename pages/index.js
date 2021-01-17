@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Card, Button, Row, Col } from 'react-bootstrap'
 import ProductTile from '../components/product-tile'
 import { withRouter } from 'next/router'
-// import queryString from 'query-string'
+import queryString from 'query-string'
 
 const API_BASE_URL = 'https://api.spacexdata.com/v3/launches?limit=100'
 
